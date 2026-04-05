@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Clock Widget</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #F3EDE9;
+      font-family: 'MuseoModerno', sans-serif;
+    }
+
+    .clock-container {
+      background-color: #F3EDE9;
+      color: #54534E;
+      padding: 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .time {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .date {
+      margin-top: 10px;
+      font-size: 16px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock-container">
+    <div class="time" id="time">--:--:--</div>
+    <div class="date" id="date">----</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      const timeString = `${hours}:${minutes}:${seconds}`;
+
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const week = ["日", "月", "火", "水", "木", "金", "土"];
+      const weekday = week[now.getDay()];
+
+      const dateString = `${year}/${month}/${day}（${weekday}）`;
+
+      document.getElementById("time").textContent = timeString;
+      document.getElementById("date").textContent = dateString;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
